@@ -1,0 +1,81 @@
+<div class="container-fluid">
+    <br>
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <h5 class="page-title"><i class="bi bi-person-fill"></i> Listado de empleados</h5>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-12">
+            <div id="accordion" class="mb-3">
+
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="header-title mb-4">Empleados <a class="btn btn-primary float-end" routerLink="create"><i class="bi bi-plus-lg"></i> Nuevo Empleado</a></h4>
+                    <div class="table-responsive">
+                        <table class="table mb-0">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre</th>
+                                    <th>Segundo Nombre</th>
+                                    <th>Primer Apellido</th>
+                                    <th>Segundo Apellido</th>
+                                    <th>Posición</th>
+                                    <th>Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let employee of employees">
+                                    <!-- | paginate:{
+                                        itemsPerPage:limit,
+                                        currentPage:currentPage,
+                                        totalItems:totalItems
+                                    } -->
+                                    <th scope="row">{{employee.idEmployee}}</th>
+                                    <td>{{employee.firstName}}</td>
+                                    <td>{{employee.middleName}}</td>
+                                    <td>{{employee.lastName}}</td>
+                                    <td>{{employee.secondLastName}}</td>
+                                    <td>{{employee.position}}</td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <button class="btn btn-sn btn-light" [routerLink]="['update', employee.idEmployee]"><i class="bi bi-pencil-fill"></i></button>                                        
+                                        </div>
+                                    </td>
+                                </tr>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-4">
+                      <!-- <pagination-template #p="paginationApi" (pageChange)="pageChange($event)">
+                          <nav aria-label="pagination">
+                              <ul class="pagination pagination-rounded justify-content-center">
+                                  <li class="page-item noselect" style="cursor: pointer;"><a
+                                          *ngIf="!p.isFirstPage()" class="page-link disabled"
+                                          (click)="p.previous()">Anterior</a></li>
+                                  <li class="page-item" [class.active]="p.getCurrent() === page.value"
+                                      *ngFor="let page of p.pages"><a class="page-link" style="cursor: pointer;"
+                                          (click)="p.setCurrent(page.value)">{{page.label}}</a></li>
+                                  <li class="page-item" style="cursor: pointer;"><a class="page-link"
+                                          *ngIf="!p.isLastPage()" (click)="p.next()">Siguiente</a></li>
+                              </ul>
+                          </nav>
+                      </pagination-template> -->
+                  </div>
+
+                </div>
+            </div> 
+        </div>
+
+
+    </div>
+</div>
+
+
+</div>

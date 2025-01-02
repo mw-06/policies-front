@@ -1,0 +1,103 @@
+<div class="container-fluid">
+    <br>
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <h5 class="page-title"><i class="bi bi-box-seam-fill"></i> {{inventory && inventory.idInventory ? 'Editar' : 'Crear'}} Inventario</h5>               
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="mb-3 header-title">Inventario</h4>
+                    <form class="form-horizontal" [formGroup]="inventoryForm">
+                        <div class="row mb-3 col-md-6">
+                            <label class="col-4 col-xl-3 col-form-label">SKU *</label>
+                            <div class="col-8 col-xl-9">
+                                <input type="text" class="form-control" placeholder="SKU" formControlName="sku">
+                                <div
+                                    *ngIf="inventoryForm.get('sku')?.invalid &&
+                                    inventoryForm.get('sku')?.errors && (inventoryForm.get('sku')?.dirty || inventoryForm.get('sku')?.touched)">
+                                    <small class="text-danger" *ngIf="inventoryForm.get('sku')?.hasError('required')">
+                                        Este campo es requerido
+                                    </small>
+                                    <small class="text-danger" *ngIf="inventoryForm.get('sku')?.hasError('maxlength')">
+                                        El campo no puede tener mas de 100 caracteres
+                                    </small>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3 col-md-6">
+                            <label class="col-4 col-xl-3 col-form-label">Nombre *</label>
+                            <div class="col-8 col-xl-9">
+                                <input type="text" class="form-control" placeholder="Nombre" formControlName="name">
+                                <div
+                                    *ngIf="inventoryForm.get('name')?.invalid &&
+                                    inventoryForm.get('name')?.errors && (inventoryForm.get('name')?.dirty || inventoryForm.get('name')?.touched)">
+                                    <small class="text-danger" *ngIf="inventoryForm.get('name')?.hasError('required')">
+                                        Este campo es requerido
+                                    </small>
+                                    <small class="text-danger" *ngIf="inventoryForm.get('name')?.hasError('maxlength')">
+                                        El campo no puede tener mas de 100 caracteres
+                                    </small>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3 col-md-6">
+                            <label class="col-4 col-xl-3 col-form-label">Descripción *</label>
+                            <div class="col-8 col-xl-9">
+                                <input type="text" class="form-control" placeholder="Descripción"
+                                    formControlName="description">
+                                <div
+                                    *ngIf="inventoryForm.get('description')?.invalid &&
+                                    inventoryForm.get('description')?.errors && (inventoryForm.get('description')?.dirty || inventoryForm.get('description')?.touched)">
+                                    <small class="text-danger"
+                                        *ngIf="inventoryForm.get('description')?.hasError('maxlength')">
+                                        El campo no puede tener mas de 150 caracteres
+                                    </small>
+                                    <small class="text-danger" *ngIf="inventoryForm.get('description')?.hasError('required')">
+                                        Este campo es requerido
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                       
+                        <div class="row mb-3 col-md-6">
+                            <label class="col-4 col-xl-3 col-form-label">Cantidad *</label>
+                            <div class="col-8 col-xl-9">
+                                <input type="text" class="form-control" placeholder="Cantidad" formControlName="quantity" type="number" pattern="^[0-9]+$" min="0" step="1">
+                                <div
+                                    *ngIf="inventoryForm.get('quantity')?.invalid &&
+                                    inventoryForm.get('quantity')?.errors && (inventoryForm.get('quantity')?.dirty || inventoryForm.get('quantity')?.touched)">
+                                    <small class="text-danger" *ngIf="inventoryForm.get('quantity')?.hasError('required')">
+                                        Este campo es requerido
+                                    </small>
+                                    <div *ngIf="inventoryForm.get('quantity')?.hasError('pattern') && inventoryForm.get('quantity')?.touched">
+                                        <small class="text-danger" *ngIf="inventoryForm.get('quantity')?.hasError('pattern')">
+                                            Solo se permiten números enteros positivos.
+                                        </small>                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </form>
+                    <hr>
+                    <div class="form-group">
+                        <button type="button" routerLink="/inventory/inventories" class="btn btn-light">Cancelar</button>
+                        <button type="button" class="btn btn-success float-end" (click)="save()"
+                            [disabled]=" inventoryForm.invalid ">
+                            <i class="bi bi-check-lg"></i> Guardar
+                        </button>
+                    </div>
+                </div> 
+            </div> 
+        </div>
+    </div>
+
+</div>

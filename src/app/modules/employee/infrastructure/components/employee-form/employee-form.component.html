@@ -1,0 +1,125 @@
+<div class="container-fluid">
+    <br>
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <h5 class="page-title"><i class="bi bi-person-fill"></i> {{employee && employee?.idEmployee ? 'Editar': 'Crear'}} Empleado</h5>               
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="mb-3 header-title">Empleado</h4>
+                    <form class="form-horizontal" [formGroup]="employeeForm">
+                        <div class="row mb-3 col-md-6">
+                            <label class="col-4 col-xl-3 col-form-label">Nombre *</label>
+                            <div class="col-8 col-xl-9">
+                                <input type="text" class="form-control" placeholder="Nombre" formControlName="firstName">
+                                <div
+                                    *ngIf="employeeForm.get('firstName')?.invalid &&
+                                    employeeForm.get('firstName')?.errors && (employeeForm.get('firstName')?.dirty || employeeForm.get('firstName')?.touched)">
+                                    <small class="text-danger" *ngIf="employeeForm.get('firstName')?.hasError('required')">
+                                        Este campo es requerido
+                                    </small>
+                                    <small class="text-danger" *ngIf="employeeForm.get('firstName')?.hasError('maxlength')">
+                                        El campo no puede tener mas de 100 caracteres
+                                    </small>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3 col-md-6">
+                            <label class="col-4 col-xl-3 col-form-label">Segundo Nombre</label>
+                            <div class="col-8 col-xl-9">
+                                <input type="text" class="form-control" placeholder="Segundo Nombre" formControlName="middleName">
+                                <div
+                                    *ngIf="employeeForm.get('middleName')?.invalid &&
+                                    employeeForm.get('middleName')?.errors && (employeeForm.get('middleName')?.dirty || employeeForm.get('middleName')?.touched)">
+                                    <small class="text-danger" *ngIf="employeeForm.get('middleName')?.hasError('required')">
+                                        Este campo es requerido
+                                    </small>
+                                    <small class="text-danger" *ngIf="employeeForm.get('middleName')?.hasError('maxlength')">
+                                        El campo no puede tener mas de 100 caracteres
+                                    </small>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3 col-md-6">
+                            <label class="col-4 col-xl-3 col-form-label">Primer Apellido *</label>
+                            <div class="col-8 col-xl-9">
+                                <input type="text" class="form-control" placeholder="Primer Apellido"
+                                    formControlName="lastName">
+                                <div
+                                    *ngIf="employeeForm.get('lastName')?.invalid &&
+                                    employeeForm.get('lastName')?.errors && (employeeForm.get('lastName')?.dirty || employeeForm.get('lastName')?.touched)">
+                                    <small class="text-danger"
+                                        *ngIf="employeeForm.get('lastName')?.hasError('maxlength')">
+                                        El campo no puede tener mas de 150 caracteres
+                                    </small>
+                                    <small class="text-danger" *ngIf="employeeForm.get('lastName')?.hasError('required')">
+                                        Este campo es requerido
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                       
+                       
+
+                       
+                        <div class="row mb-3 col-md-6">
+                            <label class="col-4 col-xl-3 col-form-label">Segundo Apellido </label>
+                            <div class="col-8 col-xl-9">
+                                <input type="text" class="form-control" placeholder="Segundo Apellido" formControlName="secondLastName">
+                                <div
+                                    *ngIf="employeeForm.get('secondLastName')?.invalid &&
+                                    employeeForm.get('secondLastName')?.errors && (employeeForm.get('secondLastName')?.dirty || employeeForm.get('secondLastName')?.touched)">
+                                    <small class="text-danger" *ngIf="employeeForm.get('secondLastName')?.hasError('required')">
+                                        Este campo es requerido
+                                    </small>
+                                    <div *ngIf="employeeForm.get('secondLastName')?.hasError('pattern') && employeeForm.get('secondLastName')?.touched">
+                                        <small class="text-danger" *ngIf="employeeForm.get('secondLastName')?.hasError('pattern')">
+                                            Solo se permiten números enteros positivos.
+                                        </small>                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3 col-md-6">
+                            <label class="col-4 col-xl-3 col-form-label">Posición *</label>
+                            <div class="col-8 col-xl-9">
+                                <input type="text" class="form-control" placeholder="Posición" formControlName="position">
+                                <div
+                                    *ngIf="employeeForm.get('position')?.invalid &&
+                                    employeeForm.get('position')?.errors && (employeeForm.get('position')?.dirty || employeeForm.get('position')?.touched)">
+                                    <small class="text-danger" *ngIf="employeeForm.get('position')?.hasError('required')">
+                                        Este campo es requerido
+                                    </small>
+                                    <div *ngIf="employeeForm.get('position')?.hasError('pattern') && employeeForm.get('position')?.touched">
+                                        <small class="text-danger" *ngIf="employeeForm.get('position')?.hasError('pattern')">
+                                            Solo se permiten números enteros positivos.
+                                        </small>                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </form>
+                    <hr *ngIf="!fromPolicy">
+                    <div class="form-group" *ngIf="!fromPolicy">
+                        <button type="button" routerLink="/employee/employees" class="btn btn-light">Cancelar</button>
+                        <button type="button" class="btn btn-success float-end" (click)="save()"
+                            [disabled]=" employeeForm.invalid ">
+                            <i class="bi bi-check-lg"></i> Guardar
+                        </button>
+                    </div>
+                </div> 
+            </div> 
+        </div>
+    </div>
+
+</div>

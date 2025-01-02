@@ -1,0 +1,110 @@
+<div class="container-fluid">
+    <br>
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <h5 class="page-title"><i class="bi bi-file-text-fill"></i> {{policy && policy.idPolicy ? 'Editar': 'Crear'}} Póliza</h5>               
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="mb-3 header-title">Póliza</h4>
+                    <form class="form-horizontal" [formGroup]="policyForm">
+                        <div class="row mb-3 col-md-6">
+                            <label class="col-4 col-xl-3 col-form-label">Empleado * </label>
+                            <div class="col-8 col-xl-9">
+                                <div class="row">
+                                    <div class="col-11">
+                                        <select class="form-select" aria-label="Default select example" formControlName="employee">
+                                            <option selected disabled>Seleccione una opción</option>
+                                            <option *ngFor="let employee of employees" [ngValue]="employee">{{employee.firstName + ' ' + (employee?.middleName ? employee.middleName + ' ': '')
+                                                + employee.lastName + ' ' + (employee?.secondLastName ? employee.secondLastName : '')}}</option>
+                                        </select>
+                                    </div>
+                                    <ng-container *ngIf="policyForm.get('employee')?.value"> 
+                                        <div class="col-1">
+                                            <a class="btn btn-sn btn-light" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="sendIdEmployee()"><i class="bi bi-pencil-fill"></i></a>
+                                        </div>
+                                    </ng-container>                                    
+                                </div>
+                                <div
+                                    *ngIf="policyForm.get('employee')?.invalid &&
+                                    policyForm.get('employee')?.errors && (policyForm.get('employee')?.dirty || policyForm.get('employee')?.touched)">
+                                    <small class="text-danger" *ngIf="policyForm.get('employee')?.hasError('required')">
+                                        Este campo es requerido
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3 col-md-6">
+                            <label class="col-4 col-xl-3 col-form-label">SKU *</label>
+                            <div class="col-8 col-xl-9">
+                                <select class="form-select" aria-label="Default select example" formControlName="inventory">
+                                    <option selected disabled>Seleccione una opción</option>
+                                    <option *ngFor="let inventory of inventories" [ngValue]="inventory">{{inventory.sku}}</option>
+                                </select>
+                                <div
+                                    *ngIf="policyForm.get('sku')?.invalid &&
+                                    policyForm.get('sku')?.errors && (policyForm.get('sku')?.dirty || policyForm.get('sku')?.touched)">
+                                    <small class="text-danger" *ngIf="policyForm.get('sku')?.hasError('required')">
+                                        Este campo es requerido
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                       
+                        <div class="row mb-3 col-md-6">
+                            <label class="col-4 col-xl-3 col-form-label">Cantidad *</label>
+                            <div class="col-8 col-xl-9">
+                                <input type="text" class="form-control" placeholder="Cantidad" formControlName="quantity" type="number" pattern="^[0-9]+$" min="0" step="1">
+                                <div
+                                    *ngIf="policyForm.get('quantity')?.invalid &&
+                                    policyForm.get('quantity')?.errors && (policyForm.get('quantity')?.dirty || policyForm.get('quantity')?.touched)">
+                                    <small class="text-danger" *ngIf="policyForm.get('quantity')?.hasError('required')">
+                                        Este campo es requerido
+                                    </small>
+                                    <div *ngIf="policyForm.get('quantity')?.hasError('pattern') && policyForm.get('quantity')?.touched">
+                                        <small class="text-danger" *ngIf="policyForm.get('quantity')?.hasError('pattern')">
+                                            Solo se permiten números enteros positivos.
+                                        </small>                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </form>
+                    <hr>
+                    <div class="form-group">
+                        <button type="button" routerLink="/policy/policies" class="btn btn-light">Cancelar</button>
+                        <button type="button" class="btn btn-success float-end" (click)="save()"
+                            [disabled]=" policyForm.invalid ">
+                            <i class="bi bi-check-lg"></i> Guardar
+                        </button>
+                    </div>
+                </div> 
+            </div> 
+        </div>
+    </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-xl">
+      <div class="modal-content">
+        <div class="modal-body">
+          <app-employee-form [fromPolicy]="fromPolicy"></app-employee-form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="getIdEmployee()">
+            <i class="bi bi-check-lg"></i> Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
