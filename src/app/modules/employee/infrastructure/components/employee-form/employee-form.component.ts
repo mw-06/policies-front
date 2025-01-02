@@ -16,10 +16,10 @@ export class EmployeeFormComponent implements OnInit {
     employee!: Employee;
     employeeForm: FormGroup = new FormGroup({
         idEmployee: new FormControl(null),
-        firstName: new FormControl('', [Validators.required, Validators.maxLength(200)]),
-        middleName: new FormControl('', [Validators.required, Validators.maxLength(200)]),
-        lastName: new FormControl('', [Validators.required, Validators.maxLength(200)]),
-        secondLastName: new FormControl('', [Validators.maxLength(200)]),
+        firstName: new FormControl('', [Validators.required, Validators.maxLength(50)]),
+        middleName: new FormControl('', [ Validators.maxLength(50)]),
+        lastName: new FormControl('', [Validators.required, Validators.maxLength(50)]),
+        secondLastName: new FormControl('', [Validators.maxLength(50)]),
         position: new FormControl('', [Validators.required, Validators.maxLength(100)])
     });
 
